@@ -1,7 +1,14 @@
-import { createServer } from "http";
+import express from "express";
 
-import { handler } from "./routes.js";
+const app = express();
 
-const server = createServer(handler);
+app.use("/users", (req, res, next) => {
+  res.send("<h1>Hello Users!</h1>");
+});
 
-server.listen(3000);
+app.use("/", (req, res, next) => {
+  console.log("this always runs!");
+  res.send("<h1>Hello World!</h1>");
+});
+
+app.listen(3000);
