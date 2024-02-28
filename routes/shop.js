@@ -2,8 +2,6 @@ const express = require("express");
 
 const adminData = require("./admin");
 
-const products = [];
-
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
