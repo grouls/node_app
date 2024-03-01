@@ -1,6 +1,29 @@
 <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
     </head>
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-        <%- include('../includes/end.ejs') %>
+
+            <main>
+                <% if (products.length > 0) { %>
+                    <div class="grid">
+                        <article class="card product-item">
+                            <h1>Total Price: €<%= totalPrice %></h1>
+                            <% for (let product of products) { %>
+                            <div>
+                                <div>
+                                    Product ID: <%= product.id %>
+                                </div>
+                                <div>
+                                    Quantity: <%= product.qty %>
+                                </div>
+                            </div>
+                            <% } %>
+                        </article>
+                    </div>
+                    <% } else { %>
+                        <h1>No Products Found!</h1>
+                        <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>
