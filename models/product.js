@@ -1,21 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
+const readFromFile = require("../util/readFromFile");
+
 const p = path.join(
   path.dirname(require.main.filename),
   "data",
   "products.json"
 );
-
-const getProductsFromFile = (callback) => {
-  fs.readFile(p, (err, fileContent) => {
-    if (err) {
-      callback([]);
-    } else {
-      callback(JSON.parse(fileContent));
-    }
-  });
-};
 
 module.exports = class Product {
   constructor(title, imageUrl, description, price) {
@@ -37,7 +29,7 @@ module.exports = class Product {
   }
 
   static fetchAll(callback) {
-    getProductsFromFile(callback);
+    readFromFile("data", "products.json", callback);
   }
 
   static findById(id, callback) {
