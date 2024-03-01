@@ -4,10 +4,20 @@ const path = require("path");
 const readFromFile = require("../util/readFromFile");
 
 const p = path.join(
-  path.dirname(require.main.filename),
+  path.dirname(process.mainModule.filename),
   "data",
   "products.json"
 );
+
+const getProductsFromFile = (cb) => {
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      cb([]);
+    } else {
+      cb(JSON.parse(fileContent));
+    }
+  });
+};
 
 module.exports = class Product {
   constructor(title, imageUrl, description, price) {
