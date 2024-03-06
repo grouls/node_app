@@ -14,7 +14,6 @@
             </div>
             <div class="form-control">
                 <label for="imageUrl">Image URL</label>
-                <!-- Remove the value when we get an image uploader -->
                 <input type="text" name="imageUrl" id="imageUrl" value="<% if(editing) { %><%= product.imageUrl %><% } %>">
             </div>
             <div class="form-control">
@@ -26,6 +25,7 @@
                 <textarea name="description" id="description" rows="5"><% if(editing) { %><%= product.description %><% } %></textarea>
             </div>
             <button class="btn" type="submit"><% if(editing) { %> Update <% } else { %>  Add  <% } %> Product</button>
+            <% if(editing) { %><input type="hidden" value="<%= product.id %>" name="productId"> <% } %>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>
