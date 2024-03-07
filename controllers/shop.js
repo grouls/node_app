@@ -2,45 +2,45 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/index", {
-        products: rows,
+        products,
         pageTitle: "Shop",
         path: "/",
       });
     })
     .catch((err) => {
-      console.log("🚀 ~ Product.fetchAll ~ err:", err);
+      console.log("🚀 ~ Product.findAll ~ err:", err);
     });
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/product-list", {
-        products: rows,
+        products,
         pageTitle: "All Products",
         path: "/products",
       });
     })
     .catch((err) => {
-      console.log("🚀 ~ Product.fetchAll ~ err:", err);
+      console.log("🚀 ~ Product.findAll ~ err:", err);
     });
 };
 
 exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
-  Product.findById(productId)
-    .then(([product]) => {
+  Product.findAll({ where: { id: productId } })
+    .then((product) => {
       res.render("shop/product-list", {
         products: product,
-        pageTitle: product.title,
+        pageTitle: product[0].title,
         path: "/products",
       });
     })
     .catch((err) => {
-      console.log("🚀 ~ Product.findById ~ err:", err);
+      console.log("🚀 ~ Product.findAll ~ err:", err);
     });
 };
 
